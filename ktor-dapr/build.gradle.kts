@@ -3,6 +3,7 @@ val kotlin_version: String by project
 val logback_version: String by project
 val koinVersion : String by project
 val ktor_version: String by project
+val daprVersion: String by project
 
 plugins {
     kotlin("jvm") version "2.0.0"
@@ -10,11 +11,11 @@ plugins {
     id("org.jetbrains.kotlin.plugin.serialization") version "2.0.0"
 }
 
-group = "example.com"
+group = "com.tdl"
 version = "0.0.1"
 
 application {
-    mainClass.set("example.com.ApplicationKt")
+    mainClass.set("com.tdl.ApplicationKt")
 }
 
 repositories {
@@ -23,6 +24,8 @@ repositories {
 
 dependencies {
     implementation("io.ktor:ktor-server-core-jvm")
+    implementation("io.dapr:dapr-sdk:$daprVersion")
+
     implementation("io.ktor:ktor-server-host-common-jvm")
     implementation("io.ktor:ktor-server-status-pages-jvm")
     implementation("io.ktor:ktor-server-content-negotiation-jvm")

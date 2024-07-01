@@ -6,18 +6,7 @@ spec:
   type: state.mongodb
   version: v1
   metadata:
-    - name: server
-      value: "mdb-tddev-de-ci-nac-01-pl-0.vyj1r.mongodb.net"
-    - name: username
-      value: ""
-    - name: password
-      value: ""
+    - name: connectionString
+      value: "mongodb://localhost:27017"
     - name: databaseName
-      value: "omni-store"
-    - name: collectionName
-      value: "stores"
-    - name: initTimeout
-      value: "100s"
-    - name: params
-      value: "?authSource=admin&replicaSet=atlas-4cvmnh-shard-0&readPreference=primary&appname=MongoDB%20Compass&ssl=true"
-
+      value: "TestDB"
