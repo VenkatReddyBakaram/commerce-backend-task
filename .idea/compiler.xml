@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <bytecodeTargetLevel>
+      <module name="com.demo.ktor-dapr" target="17" />
+      <module name="com.demo.ktor-dapr.main" target="17" />
+      <module name="com.demo.ktor-dapr.test" target="17" />
+      <module name="com.tdl.commerce-backend-task" target="17" />
+      <module name="com.tdl.commerce-backend-task.main" target="17" />
+      <module name="com.tdl.commerce-backend-task.test" target="17" />
+    </bytecodeTargetLevel>
+  </component>
+</project>
