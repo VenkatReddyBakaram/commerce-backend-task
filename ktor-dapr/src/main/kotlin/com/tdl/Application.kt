@@ -1,10 +1,9 @@
 package com.tdl
 
 import com.tdl.config.MongoConfigFactory
-import com.tdl.plugins.configureDI
-import com.tdl.plugins.configureRouting
-import com.tdl.plugins.configureSerialization
-import com.tdl.plugins.configureStatusPages
+import com.tdl.config.MongoDBProps.mongoDBProps
+import com.tdl.config.dbConnect
+import com.tdl.plugins.*
 import io.ktor.server.application.*
 
 fun main(args: Array<String>): Unit =
@@ -12,9 +11,11 @@ fun main(args: Array<String>): Unit =
 
 @Suppress("unused")
 fun Application.module() {
+    mongoDBProps = dbConnect()
     configureDI()
     configureSerialization()
     configureRouting()
     configureStatusPages()
+    //ConfigureJedisClient.redisClient.flushAll() // To flush the data from redis
     MongoConfigFactory.getDatabase()
 }

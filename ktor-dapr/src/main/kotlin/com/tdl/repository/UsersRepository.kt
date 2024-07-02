@@ -7,8 +7,11 @@ import com.tdl.model.PostDTO
 import com.tdl.model.CommentsDTO
 import org.litote.kmongo.div
 import org.litote.kmongo.eq
+import org.slf4j.LoggerFactory
 
 class UsersRepository {
+    private val log = LoggerFactory.getLogger(javaClass)
+
     private val userDetailsCollection =
         MongoConfigFactory.getDatabase().getCollection<UserResponseDTO>("user_details")
 
@@ -21,6 +24,7 @@ class UsersRepository {
     }
 
     suspend fun getUserDetails(id: String): UserResponseDTO {
+        log.info("Fetching data from DB --> $id")
         val userId = id.toInt()
         return UserResponseDTO(
             userDetailsCollection.findOne()?.userResponse?.filter {

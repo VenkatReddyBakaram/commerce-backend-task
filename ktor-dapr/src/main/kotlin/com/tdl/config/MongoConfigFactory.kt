@@ -8,35 +8,38 @@ import kotlinx.serialization.json.Json
 import org.litote.kmongo.coroutine.CoroutineDatabase
 
 object MongoConfigFactory {
-    private val dbConnect = dbConnect()
-    private val mongoClient = MongoConfig(dbConnect.databaseName, dbConnect.connectionString)
+    private val mongoClient =
+        MongoConfig(MongoDBProps.mongoDBProps.databaseName, MongoDBProps.mongoDBProps.connectionString)
+
     fun getDatabase(): CoroutineDatabase {
         return mongoClient.getDatabase()
     }
 }
 
 fun dbConnect(): MongoDBPropDTO {
-    var connectionString = ""
-    var databaseName = ""
     var dbResponse: String
-    try {
-        runBlocking {
-            dbResponse =
-                ConfigureClient.client.get("http://localhost:50006/v1.0/state/statestore/mongoDBConfig").bodyAsText()
-        }
-        val data = Json.decodeFromString<Map<String, String>>(dbResponse)
-        connectionString = data.get("connectionString")!!
-        databaseName = data.get("dbName")!!
-    } catch (_: Exception) {
+    runBlocking {
+        dbResponse =
+            ConfigureClient.client.get("http://localhost:50006/v1.0/state/statestore/mongoDBConfig").bodyAsText()
     }
+    val data = Json.decodeFromString<Map<String, String>>(dbResponse)
+    val connectionString = data["connectionString"]!!
+    val databaseName = data["dbName"]!!
+    val hostName = data["hostName"]!!
+    val portNumber = data["portNumber"]!!
+
     println("Connection String === [$connectionString] Database Name === [$databaseName]")
     return MongoDBPropDTO(
         connectionString,
-        databaseName
+        databaseName,
+        hostName,
+        portNumber
     )
 }
 
 data class MongoDBPropDTO(
-    val connectionString: String,
-    val databaseName: String
+    var connectionString: String = "",
+    var databaseName: String = "",
+    var hostName: String = "",
+    var portNumber: String = ""
 )

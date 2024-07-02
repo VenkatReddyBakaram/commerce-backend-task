@@ -36,6 +36,7 @@ dependencies {
     testImplementation("io.ktor:ktor-server-tests-jvm")
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version")
 
+    implementation("redis.clients:jedis:3.6.3")
     implementation("io.ktor:ktor-server-cio:$ktor_version")
     implementation("org.litote.kmongo:kmongo-coroutine:4.6.0")
     implementation("io.insert-koin:koin-ktor:$koinVersion")
